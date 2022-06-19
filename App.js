@@ -1,6 +1,14 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from "firebase/auth";
 
+import { Provider } from 'react-redux'
+import { applyMiddleware, createStore } from 'redux'
+import rootReducer from './redux/reducers'
+import thunk from 'redux-thunk'
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyCIRy08UPFXVAtAgzMHJ-2adVd3TOnhf24",
   authDomain: "portraitworthy.firebaseapp.com",
