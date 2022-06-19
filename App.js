@@ -23,6 +23,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './components/auth/Home';
 import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { View, Button, TextInput } from 'react-native'
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
 
-export class Register extends Component {
+export class Login extends Component {
 
     constructor(props) {
         super(props);
@@ -11,19 +11,19 @@ export class Register extends Component {
         this.state = {
             email: '',
             password: '',
-            name: '',
+            
         }
-        this.onSignUp = this.onSignUp.bind(this)
+        this.onSignIn = this.onSignUp.bind(this)
     }
 
-    onSignUp(){
-        const { email, password, name } = this.state;
+    onSignIn(){
+        const { email, password } = this.state;
         const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed In
+            //Signed In
             const user = userCredential.user;
-            console.log(results)
+            console.log(userCredential)
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -37,10 +37,7 @@ export class Register extends Component {
         return (
 
             <View>
-                <TextInput 
-                    placeholder='name'
-                    onChangeText={(name) => this.setState( {name} )}
-                />
+                
 
                 <TextInput 
                     placeholder='email'
@@ -54,7 +51,7 @@ export class Register extends Component {
                 />
 
                 <Button 
-                    title="Sign Up"
+                    title="Sign In"
                     onPress={() => this.onSignUp()}
                 />
             </View>
@@ -62,4 +59,4 @@ export class Register extends Component {
     }
 }
 
-export default Register
+export default Login
