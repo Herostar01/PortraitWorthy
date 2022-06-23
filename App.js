@@ -78,7 +78,9 @@ export class App extends Component {
     }
 
 
-    
+    if (!loggedIn) {
+      
+    }
     return(
     <NavigationContainer >
       <Stack.Navigator initialRouteName="Home">
@@ -95,10 +97,10 @@ export class App extends Component {
       </Stack.Navigator>
     
     </NavigationContainer>
+    );
 
 
-  )
-}
+  }
 }
 
 export default App;
