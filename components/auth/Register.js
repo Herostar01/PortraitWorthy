@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Button, TextInput } from 'react-native'
 
+import firebase from 'firebase/app'
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore } from "firebase/firestore"
@@ -38,15 +39,19 @@ export class Register extends Component {
         const { email, password, name } = this.state;
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
-        try {
-            const docRef =  addDoc(collection(db, "users"), {
-                name,
-                email
-            });
-            console.log("Document written with ID: ", docRef.id);
-            } catch (e) {
-            console.error("Error adding document: ", e);
-            }
+            .then((result) => {
+                firebase.firestore().collection("users")
+                    firebase.getAuth().currentUser.uid
+                    .set({
+                        name,
+                        email,
+                        
+                    })
+                console.log(result)
+        })
+            .catch((error) => {
+                console.log(error);
+            })
     }
     
     
