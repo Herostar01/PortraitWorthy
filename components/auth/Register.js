@@ -19,6 +19,7 @@ const firebaseConfig = {
 
     const app = initializeApp(firebaseConfig)
     const db = getFirestore(app)
+    const auth = getAuth(app);
 
 export class Register extends Component {
 
@@ -37,18 +38,18 @@ export class Register extends Component {
         const { email, password, name } = this.state;
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
-        .then((result) => {
-
-            // Signed In
-            // const user = userCredential.user;
-            console.log(result)
-        })
-        .catch((error) => {
-            // const errorCode = error.code;
-            // const errorMessage = error.message;
-            console.log(error)
-        })
+        try {
+            const docRef =  addDoc(collection(db, "users"), {
+                name,
+                email
+            });
+            console.log("Document written with ID: ", docRef.id);
+            } catch (e) {
+            console.error("Error adding document: ", e);
+            }
     }
+    
+    
 
     render() {
 
